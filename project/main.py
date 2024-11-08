@@ -9,7 +9,25 @@ from mediapipe.tasks.python import vision
 from PIL import Image
 
 # Inicialize o FastAPI
+
 app = FastAPI()
+
+from fastapi.middleware.cors import CORSMiddleware
+
+origins = [
+    "*",  # Permitir todas as origens
+    # "http://localhost",
+    # "http://localhost:8000",
+    # Adicione outras origens permitidas aqui
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # Permitir apenas origens especificadas
+    allow_credentials=True,
+    allow_methods=["*"],  # Permitir todos os métodos HTTP
+    allow_headers=["*"],  # Permitir todos os cabeçalhos
+)
 
 @app.get("/")
 def read_root():
