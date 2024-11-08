@@ -65,6 +65,9 @@ def detect_objects(image: Image) -> list:
     """
     Função para processar a imagem e detectar os objetos.
     """
+    # Lista de objetos que queremos detectar
+    target_objects = ['laptop', 'mouse', 'remote', 'keyboard', 'cell phone']
+
     # Converter a imagem PIL para um array numpy
     img_array = np.array(image)
 
@@ -74,10 +77,14 @@ def detect_objects(image: Image) -> list:
     # Detectar os objetos
     detection_result = detector.detect(mp_image)
 
-    # Extrair os dados das detecções
-    detection_data = [(category.category_name) 
-                      for detection in detection_result.detections 
-                      for category in detection.categories]
+    # Extrair os dados das detecções e filtrar apenas os objetos presentes na lista target_objects
+    detection_data = [
+        category.category_name 
+        for detection in detection_result.detections 
+        for category in detection.categories 
+        if category.category_name in target_objects
+    ]
+    
     return detection_data
 
 
