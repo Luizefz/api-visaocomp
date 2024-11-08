@@ -75,7 +75,7 @@ def detect_objects(image: Image) -> list:
     detection_result = detector.detect(mp_image)
 
     # Extrair os dados das detecções
-    detection_data = [(category.category_name, category.score) 
+    detection_data = [(category.category_name) 
                       for detection in detection_result.detections 
                       for category in detection.categories]
     return detection_data
