@@ -78,7 +78,7 @@ def detect_objects(image: Image) -> list:
     detection_data = [(category.category_name, category.score) 
                       for detection in detection_result.detections 
                       for category in detection.categories]
-    return detection_result
+    return detection_data
 
 
 @app.post("/predict/")
